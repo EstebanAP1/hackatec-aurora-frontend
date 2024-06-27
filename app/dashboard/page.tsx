@@ -6,7 +6,7 @@ import { logout } from '@/app/lib/actions'
 import { EyeIcon } from '@heroicons/react/24/outline'
 import ViewData from '@/app/dashboard/_ui/view-data'
 import RowOption from '@/app/dashboard/_ui/row-option'
-import { getSuicidals } from '@/app/lib/data'
+import { getCountDiscussions, getSuicidals } from '@/app/lib/data'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import { Suicidal } from '@/app/lib/definitions'
@@ -59,11 +59,23 @@ export default function DashboardPage() {
         return 0
       })
       setUsersLenght(distinctUsers.size)
-      setAnalyzed(data.length)
       setData(data)
     }
 
     fetchSuicidals()
+  }, [])
+
+  useEffect(() => {
+    const fetchTotalDisscusion = async () => {
+      const response = await getCountDiscussions()
+      if (!response.success) {
+        toast.error(response.message)
+        return
+      }
+      setAnalyzed(response.data)
+    }
+
+    fetchTotalDisscusion()
   }, [])
 
   const closeData = () => {
@@ -120,7 +132,6 @@ export default function DashboardPage() {
                 <table className='w-full'>
                   <thead className='border-b border-negro'>
                     <tr className='*:py-2 *:text-sm *:font-normal'>
-                      <th>N°</th>
                       <th>Nombre del paciente</th>
                       <th>Grado de riesgo</th>
                       <th>Estado</th>
@@ -137,7 +148,6 @@ export default function DashboardPage() {
                         <tr
                           key={index}
                           className='*:py-3 hover:bg-slate-200/40'>
-                          <th className='font-light'>{id}</th>
                           <th className='font-light'>{username}</th>
                           <th className='font-bold'>
                             {capitalizeFirstLetter(risk)}

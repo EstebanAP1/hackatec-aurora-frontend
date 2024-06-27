@@ -1,10 +1,12 @@
 'use client'
 
-import { Suicidal } from '@/app/lib/definitions'
+import { getDiscussionBySuicidal } from '@/app/lib/data'
+import { Discussion, Suicidal } from '@/app/lib/definitions'
 import { UserIcon } from '@/app/ui/icons'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 export default function ViewData({
   data,
@@ -13,7 +15,22 @@ export default function ViewData({
   data: Suicidal
   closeData: () => void
 }) {
+  const [discussions, setDiscussions] = useState([] as Discussion[])
   const { username, email, phoneNumber, risk } = data
+
+  useEffect(() => {
+    const fetchDiscussions = async () => {
+      const response = await getDiscussionBySuicidal(data.id)
+      if (!response.success) {
+        toast.error(response.message)
+        return
+      }
+
+      setDiscussions(response.data)
+    }
+
+    fetchDiscussions()
+  }, [data.id])
 
   useEffect(() => {
     const escapeHideModal = (e: KeyboardEvent) => {
@@ -29,7 +46,7 @@ export default function ViewData({
   return (
     <div
       className={clsx(
-        'absolute left-0 top-0 z-30 flex h-full w-full items-center justify-center',
+        'absolute left-0 top-0 z-30 flex h-full w-full items-center justify-center overflow-hidden',
         !data && 'pointer-events-none'
       )}>
       {data && (
@@ -44,7 +61,7 @@ export default function ViewData({
             <XMarkIcon className='size-5' />
           </button>
         </header>
-        <main className='flex grow flex-col gap-5 px-10 py-4'>
+        <main className='flex grow flex-col gap-5 overflow-y-auto px-10 py-4'>
           <div className='flex items-start justify-between'>
             <div className='flex flex-col items-start justify-center gap-2'>
               <h4 className='flex items-center justify-center gap-1 text-2xl font-bold'>
@@ -58,7 +75,17 @@ export default function ViewData({
               <p className='font-medium'>{phoneNumber}</p>
             </div>
           </div>
-          <div>*Aquí irán los comentarios!*</div>
+          <div className='flex flex-col gap-5 px-10 py-2'>
+            {discussions.map((discussion, index) => {
+              1
+              return (
+                <div key={index}>
+                  <h5 className='font-semibold'>{discussion.title}</h5>
+                  <p>{discussion.content}</p>
+                </div>
+              )
+            })}
+          </div>
         </main>
       </section>
     </div>

@@ -7,3 +7,17 @@ export interface Suicidal {
   risk: string
   behaviour: string
 }
+
+export interface Discussion {
+  content: string
+  forum: {
+    id: number
+    name: string
+    url: string
+  }
+  forumId: number
+  id: number
+  phrases: string[]
+  title: string
+  url: string
+}
