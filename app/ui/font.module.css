@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'MazzardOtf';
+  src: url('/fonts/MazzardH-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MazzardWoff2';
+  src: url('/fonts/MazzardH-Bold.woff2') format('woff2');
+}
+
+.mazzard {
+  font-family: 'MazzardOtf', 'MazzardWoff2', sans-serif;
+}
