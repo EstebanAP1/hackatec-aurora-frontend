@@ -15,10 +15,6 @@ const navSections = [
   {
     title: 'Comportamiento',
     href: '#behaviour'
-  },
-  {
-    title: 'Estadísticas',
-    href: '#stats'
   }
 ]
 
@@ -270,7 +266,7 @@ export default function HomePage() {
         <main className='flex flex-col items-center justify-center'>
           <section
             id='home'
-            className='flex flex-col items-center justify-center gap-6 py-12 text-center *:flex *:max-w-[50%] *:items-center *:justify-center'>
+            className='flex flex-col items-center justify-center gap-6 py-12 text-center *:flex *:max-w-[55%] *:items-center *:justify-center'>
             <header className='w-full flex-col'>
               <h1 className={`${font.mazzard} text-5xl text-negro`}>
                 Detección <span className='text-rosa'>Temprana de</span>{' '}
@@ -280,8 +276,9 @@ export default function HomePage() {
             </header>
             <main>
               <p className='flex-col text-pretty text-lg'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio autem illo quasi dolores quas iste
+                Innovamos para proteger lo más valioso: Tu salud mental,
+                ofreciendo detección temprana y precisa para intervenir a tiempo
+                y transformar vidas.
               </p>
             </main>
             <footer className='flex w-full select-none gap-5'>
