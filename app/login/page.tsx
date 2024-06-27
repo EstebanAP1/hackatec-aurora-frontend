@@ -55,17 +55,19 @@ export default function LoginPage() {
   return (
     <div className='flex h-dvh w-dvw items-center justify-center bg-blanco'>
       <section className='flex min-h-[90%] w-full max-w-6xl flex-col items-center justify-center gap-12 rounded-xl bg-negro py-10'>
-        <header className='flex items-center justify-center gap-1'>
-          <Image
-            src={'/logo-safecide.png'}
-            alt='Logo de safecide'
-            width={100}
-            height={100}
-            quality={80}
-            priority
-            className='size-14 rounded-full'
-          />
-          <h2 className={`${font.mazzard} text-4xl text-white`}>SAFECIDE</h2>
+        <header className='flex items-center justify-center'>
+          <Link href={'/'} className='flex items-center justify-center gap-1'>
+            <Image
+              src={'/logo-safecide.png'}
+              alt='Logo de safecide'
+              width={100}
+              height={100}
+              quality={80}
+              priority
+              className='size-14 rounded-full'
+            />
+            <h2 className={`${font.mazzard} text-4xl text-white`}>SAFECIDE</h2>
+          </Link>
         </header>
         <main className='flex w-full flex-col items-center justify-center gap-10'>
           <form
